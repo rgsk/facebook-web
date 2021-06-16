@@ -1,0 +1,13 @@
+.sideBarBlock {
+  // border: 10px solid blue;
+  background-color: var(--bg-container);
+  position: fixed;
+  width: 300px;
+  padding: 1rem;
+  height: calc(100vh - var(--nav-size) - 2rem);
+  overflow: auto;
+  &::-webkit-scrollbar {
+    visibility: hidden;
+    width: 9px;
+  }
+}

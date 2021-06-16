@@ -1,0 +1,22 @@
+.hint {
+  background-color: rgba(255, 255, 255, 0.808);
+  color: black;
+  font-size: 13px;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 0.7rem;
+  min-width: max-content;
+  max-height: 1rem;
+  position: absolute;
+  animation: showHint var(--speed);
+  animation-delay: 300ms;
+  animation-fill-mode: backwards;
+  z-index: 20;
+}
+@keyframes showHint {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

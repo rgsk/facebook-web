@@ -1,0 +1,36 @@
+.contactsBlock {
+  background-color: var(--bg-container);
+  position: fixed;
+  height: calc(100vh - var(--nav-size));
+  width: 280px;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    visibility: hidden;
+    width: 9px;
+  }
+
+  .head {
+    // width: 100px;
+    padding-right: 0.9rem;
+    margin-top: -0.5rem;
+    display: flex;
+    align-items: center;
+
+    .mid {
+      flex: 1;
+    }
+    .icons {
+      display: flex;
+    }
+  }
+  .title {
+    padding-left: 0.5rem;
+    color: #94979a;
+    font-weight: bold;
+  }
+
+  .line {
+    border-bottom: var(--border);
+    margin: 1rem 0;
+  }
+}

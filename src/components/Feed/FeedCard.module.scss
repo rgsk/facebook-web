@@ -1,0 +1,126 @@
+.feedContainer {
+  color: var(--font-color);
+  background-color: var(--bg);
+  border-radius: var(--border-radius);
+
+  .topBar {
+    display: flex;
+    padding: 1rem;
+    padding-bottom: 0;
+    .image {
+    }
+    .details {
+      .dateTime {
+        display: flex;
+        align-items: center;
+        color: var(--text-color);
+        font-size: 0.8rem;
+        svg {
+          margin: 0 4px;
+          fill: var(--text-color);
+          width: var(--small-icon-size);
+        }
+      }
+    }
+  }
+  .text {
+    padding: 1rem;
+  }
+  .asset {
+    img {
+      width: 100%;
+    }
+  }
+  .postResponse {
+    color: var(--text-color);
+    padding: 0 1rem;
+    padding-top: 0.2rem;
+    display: flex;
+    .like {
+      display: flex;
+      svg {
+        width: var(--button-size-small);
+      }
+    }
+    .spacer {
+      flex: 1;
+    }
+  }
+  .buttonsSection {
+    padding: 1rem;
+    position: relative;
+    .buttons {
+      padding: 0.2rem 0;
+      display: flex;
+
+      border-top: var(--border);
+      border-bottom: var(--border);
+      .button {
+        cursor: pointer;
+        border-radius: var(--border-radius);
+        padding: 0.5rem 0;
+        color: var(--text-color);
+        font-weight: bold;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+          background-color: var(--background-hover);
+        }
+        svg {
+          width: var(--small-icon-size);
+          height: var(--small-icon-size);
+          fill: var(--text-color);
+          margin-right: 10px;
+        }
+      }
+    }
+    @keyframes barUp {
+      to {
+        transform: translateY(-90%);
+      }
+    }
+    .emojiBar {
+      position: absolute;
+      animation: barUp var(--speed) forwards ease;
+
+      background-color: var(--bg);
+      border-radius: 10rem;
+      box-shadow: 0px 0px 0px 1px hsla(0, 0%, 100%, 0.1);
+      display: flex;
+      align-items: center;
+      .emoji {
+        position: relative;
+        padding-top: 4px;
+        img {
+          margin: 0 5px;
+          width: calc(var(--button-size-medium) - 10px);
+          transition: all var(--speed);
+          cursor: pointer;
+          &:hover {
+            transform: translateY(-3px) scale(1.15);
+          }
+          &:hover + .emojiText {
+            display: block;
+          }
+        }
+        .emojiText {
+          position: absolute;
+          top: -80%;
+          left: 50%;
+          padding: 13px 5px;
+          line-height: 0;
+          font-size: 0.8rem;
+          font-weight: bold;
+          color: white;
+          background-color: rgba(0, 0, 0, 0.61);
+          border-radius: 1rem;
+          text-align: center;
+          display: none;
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
+}

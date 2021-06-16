@@ -1,0 +1,2 @@
+// netlify build command
+CI= yarn build

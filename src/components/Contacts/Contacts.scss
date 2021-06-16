@@ -1,0 +1,14 @@
+.contact-enter {
+  opacity: 0;
+}
+.contact-enter-active {
+  opacity: 1;
+
+  transition: all var(--speed) ease;
+}
+.contact-exit {
+}
+.contact-exit-active {
+  opacity: 0;
+  transition: all var(--speed) ease;
+}

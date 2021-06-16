@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: 'PT Sans Caption', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --nav-size: 60px;
+  --button-size-small: calc(var(--nav-size) * 0.3);
+  --button-size: calc(var(--nav-size) * 0.5);
+  --button-size-large: calc(var(--nav-size) * 1.6);
+  --button-size-medium: calc(var(--nav-size) * 0.8);
+  --small-icon-size: 17px;
+
+  --border-radius: 8px;
+  --speed: 300ms;
+  --wall: #f0f2f5;
+  --btn-blue: #1877f2;
+  --btn-green: #42b72a;
+  --placeholder: #e7dac9;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* Scroll Bar */
+.scrollBar::-webkit-scrollbar {
+  display: block;
+  width: 9px;
+}
+
+/* Track */
+
+/* Handle */
+.scrollBar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: hsla(0, 0%, 100%, 0.2);
+}

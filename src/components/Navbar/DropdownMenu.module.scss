@@ -1,0 +1,37 @@
+.dropdown {
+  position: fixed;
+  top: 58px;
+  background-color: var(--bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow: hidden;
+  transition: height var(--speed) ease;
+}
+
+.menu {
+  width: 300px;
+}
+
+.menuItem {
+  color: var(--text-color);
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background-color var(--speed);
+  padding: 0.5rem;
+  padding-right: 0;
+}
+
+.menuItem:hover {
+  background-color: var(--background-hover);
+}
+.disableHover:hover {
+  background-color: transparent;
+  filter: none;
+}
+.iconRight {
+  margin-left: auto;
+}

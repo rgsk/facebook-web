@@ -1,0 +1,17 @@
+.messagingWindow {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  height: 30vh;
+  width: 30vw;
+  .messages {
+    display: flex;
+    .receivedMessages {
+      flex: 1;
+    }
+    .sentMessages {
+      flex: 1;
+    }
+  }
+}

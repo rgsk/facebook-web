@@ -1,0 +1,38 @@
+.iconButton {
+  // border: 1px solid blue;
+  transition: filter 300ms;
+  cursor: pointer;
+  margin-right: 8px;
+  position: relative;
+}
+.iconButton:hover {
+  filter: brightness(1.2);
+}
+.iconButton {
+  .icon {
+    // border: 1px solid red;
+    width: var(--button-size);
+    height: var(--button-size);
+    background-color: var(--icon-background);
+    border-radius: 50%;
+
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      fill: var(--font-color);
+      height: 20px;
+      width: 20px;
+    }
+  }
+  .large {
+    transform: scale(1.2);
+  }
+  .enhanceSvg {
+    svg {
+      height: 28px;
+      width: 28px;
+    }
+  }
+}

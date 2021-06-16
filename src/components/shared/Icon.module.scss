@@ -1,0 +1,24 @@
+.icon {
+  // border: 1px solid blue;
+  border-radius: 50%;
+  margin: 0 3px;
+  cursor: pointer;
+  position: relative;
+}
+
+.icon {
+  &:hover {
+    background-color: hsla(0, 0%, 56%, 0.1);
+  }
+  .iconContainer {
+    // border: 1px solid red;
+    padding: 10px;
+    width: var(--small-icon-size);
+    height: var(--small-icon-size);
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: #8c8d90;
+    }
+  }
+}

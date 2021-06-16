@@ -1,0 +1,37 @@
+.item {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background-color var(--speed);
+  position: relative;
+  cursor: pointer;
+  .border {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 3px solid var(--highlight-color);
+    transform: translateY(6px);
+  }
+  .hint {
+    div {
+      transform: translate(-50%, 122%) !important;
+    }
+  }
+
+  svg {
+    height: 50%;
+    width: auto;
+    fill: #8c8d90;
+  }
+  &:hover {
+    background-color: var(--background-hover);
+  }
+}
+.itemActive {
+  svg {
+    fill: var(--highlight-color);
+  }
+}

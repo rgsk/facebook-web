@@ -1,0 +1,17 @@
+.imageContainer {
+  width: var(--button-size);
+  height: var(--button-size);
+  border-radius: 50%;
+  background-size: cover;
+  background-position: top;
+  // border: 3px solid wheat;
+  margin-right: 8px;
+}
+.large {
+  width: var(--button-size-large);
+  height: var(--button-size-large);
+}
+.medium {
+  width: var(--button-size-medium);
+  height: var(--button-size-medium);
+}

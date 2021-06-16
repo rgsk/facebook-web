@@ -1,0 +1,10 @@
+.item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  .hint {
+    div {
+      transform: translate(-50%, 130%) !important;
+    }
+  }
+}
