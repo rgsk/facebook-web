@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useContext, useEffect } from 'react';
+import io from 'socket.io-client';
 import {
   ApolloClient,
   ApolloProvider,
@@ -13,6 +13,7 @@ import { setContext } from 'apollo-link-context';
 import Login from './pages/Login';
 import IsAuthenticated from './components/IsAuthenticated';
 import Home from './pages/Home';
+import { GlobalContext } from './state/GlobalContext';
 
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_SERVER_URL + '/graphql',
@@ -33,6 +34,15 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 function App() {
+  const { setSocket } = useContext(GlobalContext);
+  useEffect(() => {
+    const socket = io(process.env.REACT_APP_SERVER_URL);
+    socket.on('connect', () => {
+      console.log('you connected with id : ' + socket.id);
+    });
+    setSocket(socket);
+  }, [setSocket]);
+
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>

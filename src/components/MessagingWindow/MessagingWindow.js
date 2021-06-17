@@ -1,21 +1,27 @@
 import styles from './MessagingWindow.module.scss';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import Card from '../shared/Card';
 
 import TextareaAutosize from 'react-textarea-autosize';
-import io from 'socket.io-client';
+
 import ProfileImage from '../../assets/images/profile.jpg';
 
 import { useLoggedInUserState } from '../../state/userState';
 import { useCurrentRoomInfoState } from '../../state/messageState';
 import { ReactComponent as SendIcon } from '../../assets/icons/send.svg';
+import { GlobalContext } from '../../state/GlobalContext';
+import Icon from '../shared/Icon';
 function MessagingWindow() {
+  const { socket } = useContext(GlobalContext);
   const { currentRoomInfo } = useCurrentRoomInfoState();
   const [message, setMessage] = useState('');
-  const [socket, setSocket] = useState();
+
   const { loggedInUser } = useLoggedInUserState();
   const [messages, setMessages] = useState([]);
   const [members, setMembers] = useState([]);
+  const messagesRef = useRef();
+  const textAreaRef = useRef();
+  const [sendingMessages, setSendingMessages] = useState(false);
   useEffect(() => {
     // console.log(currentRoomInfo);
 
@@ -33,45 +39,55 @@ function MessagingWindow() {
         chatIsOpen: user.id === loggedInUser.id ? true : false,
       }))
     );
-    const socket = io(process.env.REACT_APP_SERVER_URL);
-    socket.on('connect', () => {
-      // console.log('you connected with id : ' + socket.id);
-      socket.emit('join-room', currentRoomInfo.id, loggedInUser.id);
-      socket.on('receive-message', (message, sender) => {
-        // console.log(message);
-        // console.log(sender);
-        // we need a sender since we can chat in a group
-        setMessages((prev) => {
-          return [...prev, { body: message, sender }];
-        });
-      });
-      socket.on('member-joined-chat', (joinerId) => {
-        setMembers((prev) => {
-          const updated = [];
-          prev.forEach((member) => {
-            if (member.id === joinerId) {
-              updated.push({
-                ...member,
-                chatIsOpen: true,
-              });
-            } else {
-              updated.push(member);
-            }
-          });
-          return updated;
-        });
+
+    socket.emit('join-room', currentRoomInfo.id, loggedInUser.id);
+    socket.on('receive-message', (message, sender) => {
+      // console.log(message);
+      // console.log(sender);
+      // we need a sender since we can chat in a group
+      setSendingMessages(false); // so that we don't scroll automatically
+      setMessages((prev) => {
+        return [...prev, { body: message, sender }];
       });
     });
-
-    setSocket(socket);
-  }, [currentRoomInfo, loggedInUser.id]);
+    socket.on('member-joined-chat', (joinerId) => {
+      setMembers((prev) => {
+        const updated = [];
+        prev.forEach((member) => {
+          if (member.id === joinerId) {
+            updated.push({
+              ...member,
+              chatIsOpen: true,
+            });
+          } else {
+            updated.push(member);
+          }
+        });
+        return updated;
+      });
+    });
+  }, [currentRoomInfo, loggedInUser.id, socket]);
   const sendMessage = () => {
+    setSendingMessages(true);
     socket.emit('send-message', message, currentRoomInfo.id, loggedInUser);
     setMessages((prev) => {
       return [...prev, { body: message, sender: loggedInUser }];
     });
+    textAreaRef.current.blur();
+    setMessage('');
+    setTimeout(() => {
+      textAreaRef.current.focus();
+    }, 0);
     // console.log(messages);
   };
+  // useEffect(() => {
+  //   if (sendingMessages) {
+  //     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+  //   }
+  // }, [sendingMessages, messages]);
+  useEffect(() => {
+    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+  }, [messages]);
   return (
     <div
       className={styles.messagingWindow}
@@ -97,9 +113,9 @@ function MessagingWindow() {
         </div>
       </div>
 
-      <div className={styles.messages}>
+      <div className={styles.messages} ref={messagesRef}>
         {messages.map((message, i) => (
-          <p
+          <span
             key={i}
             className={[
               styles.message,
@@ -109,18 +125,29 @@ function MessagingWindow() {
             ].join(' ')}
           >
             {message.body}
-          </p>
+          </span>
         ))}
       </div>
       <div className={styles.inputButtonContainer}>
         <TextareaAutosize
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              sendMessage();
+            }
+          }}
+          onChange={(e) => {
+            // console.log(e);
+            setMessage(e.target.value);
+          }}
           maxRows={5}
           className={styles.textArea}
+          ref={textAreaRef}
         />
         <div className={styles.sendButton} onClick={sendMessage}>
-          <SendIcon />
+          <Icon hintText="Press Enter to send" hintPosition="tc">
+            <SendIcon />
+          </Icon>
         </div>
       </div>
     </div>

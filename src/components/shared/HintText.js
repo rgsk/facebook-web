@@ -20,6 +20,12 @@ function HintText(props) {
       left: '50%',
       transform: 'translate(-50%, 100%)',
     };
+  } else if (props.position === 'tc' || props.position === 'ct') {
+    style = {
+      top: '-5px',
+      left: '50%',
+      transform: 'translate(-50%, -100%)',
+    };
   }
   return (
     <div className={styles.hint} style={style}>
