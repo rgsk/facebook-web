@@ -69,22 +69,42 @@ const Login = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <Button
-          btnType="info"
-          style={{
-            fontSize: '1rem',
-            margin: '2rem auto',
-          }}
-          onClick={async () => {
-            await commonSubmit({
-              email: 'dummy@gmail.com',
-              password: 'dummy',
-            });
-            history.push('/');
-          }}
-        >
-          Sign In as Dummy user for testing
-        </Button>
+        <div className={styles.buttons}>
+          <Button
+            btnType="info"
+            style={{
+              fontSize: '1rem',
+              margin: '2rem auto',
+            }}
+            onClick={async () => {
+              await commonSubmit({
+                email: '1@gmail.com',
+                password: '111',
+              });
+              history.push('/');
+            }}
+          >
+            Sign In as user 1
+          </Button>
+
+          <Button
+            btnType="info"
+            style={{
+              fontSize: '1rem',
+              margin: '2rem auto',
+            }}
+            onClick={async () => {
+              await commonSubmit({
+                email: '2@gmail.com',
+                password: '222',
+              });
+              history.push('/');
+            }}
+          >
+            Sign In as user 2
+          </Button>
+        </div>
+
         <CardBox>
           <Formik
             initialValues={initialValues}

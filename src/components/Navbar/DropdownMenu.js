@@ -3,15 +3,17 @@ import { ReactComponent as CogIcon } from '../../assets/icons/cog.svg';
 import { ReactComponent as ChevronIcon } from '../../assets/icons/chevron.svg';
 import { ReactComponent as ArrowIcon } from '../../assets/icons/arrow.svg';
 import { ReactComponent as BoltIcon } from '../../assets/icons/bolt.svg';
+import { ReactComponent as LogoutIcon } from '../../assets/icons/logout.svg';
 import { CSSTransition } from 'react-transition-group';
 import styles from './DropdownMenu.module.scss';
 import './DropdownMenu.scss';
 import IconButton from '../shared/IconButton';
+import { useLoggedInUserState } from '../../state/userState';
 function DropdownMenu() {
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
-
+  const { logoutUser } = useLoggedInUserState();
   useEffect(() => {
     // console.log(dropdownRef.current.firstChild);
     setMenuHeight(dropdownRef.current.firstChild.offsetHeight);
@@ -38,6 +40,9 @@ function DropdownMenu() {
         onClick={(e) => {
           !backButton && setActiveMenu(props.goToMenu);
           e.stopPropagation();
+          if (props.onClick) {
+            props.onClick();
+          }
         }}
       >
         <IconButton
@@ -86,6 +91,9 @@ function DropdownMenu() {
           >
             Animals
           </DropdownItem>
+          <DropdownItem leftIcon={<LogoutIcon />} onClick={logoutUser}>
+            Log out
+          </DropdownItem>
         </div>
       </CSSTransition>
 
@@ -98,12 +106,12 @@ function DropdownMenu() {
       >
         <div className={styles.menu}>
           <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
-            <h2>My Tutorial</h2>
+            <h2>My Profile</h2>
           </DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>HTML</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>CSS</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>JavaScript</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>Awesome!</DropdownItem>
+          <DropdownItem leftIcon={<BoltIcon />}>Hello</DropdownItem>
+          <DropdownItem leftIcon={<BoltIcon />}>B Bye</DropdownItem>
+          <DropdownItem leftIcon={<BoltIcon />}>Kaise ho</DropdownItem>
+          <DropdownItem leftIcon={<BoltIcon />}>Theek hu!</DropdownItem>
         </div>
       </CSSTransition>
 

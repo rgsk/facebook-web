@@ -1,17 +1,66 @@
 .messagingWindow {
   position: fixed;
   bottom: 0;
-  right: 0;
-  background-color: white;
-  height: 30vh;
+  right: 7%;
+  height: 80vh;
+  border-radius: var(--border-radius);
   width: 30vw;
-  .messages {
-    display: flex;
-    .receivedMessages {
-      flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  .controls {
+    padding: 0.5rem 1rem;
+    .card {
+      .info {
+        .username {
+        }
+        .activeStatus {
+          font-size: 0.8rem;
+          color: var(--text-color-light);
+          font-weight: bold;
+        }
+      }
     }
-    .sentMessages {
+  }
+  .messages {
+    overflow: auto;
+    .message {
+      color: var(--text-color);
+      &.sent {
+      }
+      &.received {
+      }
+    }
+  }
+  .inputButtonContainer {
+    // border: 1px solid red;
+
+    display: flex;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+    .textArea {
       flex: 1;
+      border-radius: 1rem;
+      background-color: var(--bg-accent);
+      color: var(--text-color);
+      font-family: inherit;
+      font-weight: 400;
+      padding: 0.5rem;
+      outline: none;
+      border: none;
+      resize: none;
+
+      &::-webkit-scrollbar {
+      }
+    }
+    .sendButton {
+      display: flex;
+      align-items: center;
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--color-dodgerblue);
+      }
     }
   }
 }

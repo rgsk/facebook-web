@@ -27,6 +27,10 @@
     margin-left: 4rem;
     margin-right: 2rem;
     text-align: center;
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
     .content {
       // border: 2px solid red;
       padding: 1rem;
