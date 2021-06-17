@@ -36,7 +36,7 @@ function MessagingWindow() {
     setMembers(
       currentRoomInfo.users.map((user) => ({
         ...user,
-        chatIsOpen: user.id === loggedInUser.id ? true : false,
+        isInRoom: user.id === loggedInUser.id ? true : false,
       }))
     );
 
@@ -57,7 +57,7 @@ function MessagingWindow() {
           if (member.id === joinerId) {
             updated.push({
               ...member,
-              chatIsOpen: true,
+              isInRoom: true,
             });
           } else {
             updated.push(member);

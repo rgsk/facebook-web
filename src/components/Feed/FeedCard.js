@@ -18,7 +18,7 @@ import AngryEmoji from '../../assets/emojis/angry.png';
 
 import Icon from '../shared/Icon';
 
-function FeedCard() {
+function FeedCard({ name, text }) {
   const [likeHovered, setLikeHovered] = useState(false);
   const [barHovered, setBarHovered] = useState(false);
   const BAR_TIMEOUT = 1000;
@@ -32,9 +32,7 @@ function FeedCard() {
           <ImageSvg image={ProfileImage} medium />
         </div>
         <div className={styles.details}>
-          <div className={styles.title}>
-            Ministry of Health and Family Welfare, Government of India
-          </div>
+          <div className={styles.name}>{name}</div>
           <div className={styles.dateTime}>
             12 May at 19:34 &middot; <GlobeIcon />
           </div>
@@ -45,10 +43,7 @@ function FeedCard() {
           </Icon>
         </div>
       </div>
-      <div className={styles.text}>
-        Are you a Senior Software Engineer living outside the U.S.? Interested
-        in top remote U.S. Software jobs?
-      </div>
+      <div className={styles.text}>{text}</div>
       <div className={styles.asset}>
         <img src={ProfileImage} alt="" />
       </div>

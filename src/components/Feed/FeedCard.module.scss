@@ -10,6 +10,9 @@
     .image {
     }
     .details {
+      flex: 1;
+      .name {
+      }
       .dateTime {
         display: flex;
         align-items: center;

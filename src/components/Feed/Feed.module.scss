@@ -3,4 +3,28 @@
   background-color: var(--bg-container);
 
   padding: 1rem 10vw;
+  .newFeed {
+    color: var(--font-color);
+    background-color: var(--bg);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin: 1rem 0;
+    gap: 1rem;
+    display: flex;
+
+    .box {
+      background-color: var(--bg-accent);
+      flex: 1;
+      // border: 1px solid red;
+      color: rgb(197, 197, 197);
+      border-radius: 2rem;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      cursor: pointer;
+      &:hover {
+        filter: brightness(120%);
+      }
+    }
+  }
 }

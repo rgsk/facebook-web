@@ -13,6 +13,7 @@ function IconButton(props) {
         className={[
           styles.icon,
           props.large ? styles.large : '',
+          props.small ? styles.small : '',
           props.enhanceSvg ? styles.enhanceSvg : '',
         ].join(' ')}
         onMouseEnter={() => setShowHint(true)}
