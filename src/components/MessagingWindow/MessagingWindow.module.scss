@@ -28,6 +28,7 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 2px;
     padding: 1rem;
     // border: 1px solid red;
@@ -49,10 +50,12 @@
       }
     }
   }
+
   .inputButtonContainer {
     // border: 1px solid red;
 
     display: flex;
+    align-items: flex-end;
     padding: 0.5rem 1rem;
     .textArea {
       flex: 1;
@@ -70,6 +73,7 @@
       }
     }
     .sendButton {
+      // border: 1px solid red;
       svg {
         fill: var(--color-dodgerblue);
       }
