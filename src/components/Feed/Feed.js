@@ -8,6 +8,7 @@ import { useLoggedInUserState } from '../../state/userState';
 import Modal from '../shared/Modal';
 import CreatePostCard from './CreatePostCard';
 import ProfileImageContainer from '../shared/ProfileImageContainer';
+import { reverse } from '../../utils';
 const GET_ALL_POSTS = gql`
   query getAllPosts {
     getAllPosts {
@@ -22,6 +23,7 @@ const GET_ALL_POSTS = gql`
           username
         }
         comments {
+          id
           body
           user {
             id
@@ -29,6 +31,8 @@ const GET_ALL_POSTS = gql`
           }
         }
         likes {
+          id
+          reactionType
           user {
             id
             username
@@ -76,19 +80,11 @@ function Feed() {
             What's on your mind, {loggedInUser.username}?
           </div>
         </div>
-        {createdPosts.map((post) => (
-          <FeedCard
-            name={post.user.username}
-            text={post.body}
-            imageUrl={post.imageUrl}
-          />
+        {createdPosts.map((post, i) => (
+          <FeedCard post={post} key={i} />
         ))}
-        {data.getAllPosts.posts.map((post) => (
-          <FeedCard
-            name={post.user.username}
-            text={post.body}
-            imageUrl={post.imageUrl}
-          />
+        {data.getAllPosts.posts.map((post, i) => (
+          <FeedCard post={post} key={i} />
         ))}
       </div>
     </div>

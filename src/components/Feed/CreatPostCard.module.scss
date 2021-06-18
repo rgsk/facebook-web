@@ -72,7 +72,8 @@
           width: 9px;
         }
         textarea {
-          width: 98%;
+          box-sizing: border-box;
+          width: 100%;
           background-color: var(--bg);
           resize: none;
           color: inherit;
@@ -86,7 +87,8 @@
           // border: 1px solid red;
         }
         .selectedImage {
-          width: 99%;
+          box-sizing: border-box;
+          width: 100%;
           border-radius: var(--border-radius);
         }
       }

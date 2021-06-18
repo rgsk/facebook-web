@@ -27,6 +27,7 @@
     }
   }
   .text {
+    word-break: break-all;
     padding: 1rem;
   }
   .asset {
@@ -60,6 +61,7 @@
       border-bottom: var(--border);
       .button {
         cursor: pointer;
+        user-select: none;
         border-radius: var(--border-radius);
         padding: 0.5rem 0;
         color: var(--text-color);
@@ -123,6 +125,81 @@
           display: none;
           transform: translateX(-50%);
         }
+      }
+    }
+  }
+  .commentsSection {
+    // background-color: red;
+    padding: 1rem;
+    .comments {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .comment {
+        .top {
+          display: flex;
+          gap: 5px;
+          .content {
+            background-color: var(--bg-accent);
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+          }
+        }
+        .bar {
+          color: rgb(175, 175, 175);
+          font-size: 0.8rem;
+          font-weight: bold;
+          padding-left: 1rem;
+          margin: 3px 0;
+          span {
+            &:hover {
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+    .commentUser {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+      .commentInput {
+        border-radius: 1rem;
+        box-sizing: border-box;
+        width: 100%;
+        font-family: inherit;
+        font-size: 1rem;
+        background-color: var(--bg-accent);
+        resize: none;
+        color: inherit;
+        outline: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        &::-webkit-input-placeholder {
+          color: rgb(177, 177, 177);
+        }
+      }
+    }
+    .commentsDetails {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+      .detail {
+        color: rgb(177, 177, 177);
+      }
+    }
+    .textButton {
+      color: rgb(177, 177, 177);
+
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
   }

@@ -15,3 +15,8 @@ export class Debounce {
     this.timeOut = setTimeout(() => this.callback(...args), this.delay);
   }
 }
+export const reverse = (arr) => {
+  const updated = [...arr];
+  updated.reverse();
+  return updated;
+};
