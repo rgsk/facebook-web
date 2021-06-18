@@ -85,6 +85,10 @@
           }
           // border: 1px solid red;
         }
+        .selectedImage {
+          width: 99%;
+          border-radius: var(--border-radius);
+        }
       }
     }
     .box {
@@ -98,8 +102,12 @@
         flex: 1;
         cursor: pointer;
       }
+      .fileInput {
+        display: none;
+      }
       .images {
         display: flex;
+
         img {
           width: 40px;
           height: 40px;

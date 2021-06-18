@@ -15,14 +15,15 @@ import HostQnAImage from '../../assets/iconsCropped/hostqna.png';
 import PhotoImage from '../../assets/iconsCropped/photo.png';
 import TagImage from '../../assets/iconsCropped/tag.png';
 import { ReactComponent as MoreIcon } from '../../assets/icons/more.svg';
+import images from '../../api/images.api';
 const CREATE_POST_MUTATION = gql`
-  mutation createPost($body: String!, $userId: ID!) {
-    createPost(body: $body, userId: $userId) {
+  mutation createPost($body: String, $userId: ID!, $imageUrl: String) {
+    createPost(body: $body, userId: $userId, imageUrl: $imageUrl) {
       message
       post {
         id
         body
-
+        imageUrl
         user {
           id
           username
@@ -48,22 +49,37 @@ function CreatePostCard({ close, addPost }) {
   const [createPost, { error, loading }] = useMutation(CREATE_POST_MUTATION);
   const { loggedInUser } = useLoggedInUserState();
   const [postInput, setPostInput] = useState();
+  const [imgPreview, setImgPreview] = useState();
   const textInputRef = useRef();
+  const fileInputRef = useRef();
+
   useEffect(() => {
     textInputRef.current.focus();
   }, []);
   const submitPost = async () => {
-    console.log(postInput);
+    if (!postInput && !imgPreview) return;
+    // console.log(postInput);
     const response = await createPost({
       variables: {
         body: postInput,
         userId: loggedInUser.id,
+        imageUrl: imgPreview,
       },
     });
     // console.log(response);
     const createdPost = response.data.createPost.post;
     addPost(createdPost);
     close();
+  };
+  const saveToServer = (file, userId) => {
+    return images
+      .save(file, userId)
+      .then((result) => {
+        return result.asset.value;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
   return (
     <div className={styles.card}>
@@ -95,12 +111,36 @@ function CreatePostCard({ close, addPost }) {
               value={postInput}
               onChange={(e) => setPostInput(e.target.value)}
             />
+
+            {imgPreview && (
+              <img
+                src={process.env.REACT_APP_SERVER_URL + '/' + imgPreview}
+                alt="selected"
+                className={styles.selectedImage}
+              />
+            )}
           </div>
         </div>
         <div className={styles.box}>
           <p className={styles.text}>Add to your post</p>
+          <input
+            type="file"
+            className={styles.fileInput}
+            ref={fileInputRef}
+            onChange={async (e) => {
+              const file = e.target.files[0];
+              // console.log(file);
+              const savedFile = await saveToServer(file, loggedInUser.id);
+              setImgPreview(savedFile);
+            }}
+          />
           <p className={styles.images}>
-            <IconButton small hintText="Photo/Video" hintPosition="tc">
+            <IconButton
+              small
+              onClick={() => fileInputRef.current.click()}
+              hintText="Photo/Video"
+              hintPosition="tc"
+            >
               <img src={PhotoImage} alt="" />
             </IconButton>
             <IconButton small hintText="Tag People" hintPosition="tc">

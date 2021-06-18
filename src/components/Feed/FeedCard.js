@@ -18,12 +18,13 @@ import AngryEmoji from '../../assets/emojis/angry.png';
 
 import Icon from '../shared/Icon';
 
-function FeedCard({ name, text }) {
+function FeedCard({ name, text, imageUrl }) {
   const [likeHovered, setLikeHovered] = useState(false);
   const [barHovered, setBarHovered] = useState(false);
   const BAR_TIMEOUT = 1000;
   const likeTimeout = useRef();
   const barTimeout = useRef();
+  console.log(imageUrl);
   return (
     <div className={styles.feedContainer}>
       <div className={styles.additionalInfo}></div>
@@ -45,7 +46,9 @@ function FeedCard({ name, text }) {
       </div>
       <div className={styles.text}>{text}</div>
       <div className={styles.asset}>
-        <img src={ProfileImage} alt="" />
+        {imageUrl && (
+          <img src={process.env.REACT_APP_SERVER_URL + '/' + imageUrl} alt="" />
+        )}
       </div>
       <div className={styles.postResponse}>
         <div className={styles.like}>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FeedCard from './FeedCard';
 import styles from './Feed.module.scss';
 import { gql, useQuery } from '@apollo/client';
+import ProfileImage from '../../assets/images/profile.jpg';
 
 import { useLoggedInUserState } from '../../state/userState';
 import Modal from '../shared/Modal';
@@ -15,7 +16,7 @@ const GET_ALL_POSTS = gql`
       posts {
         id
         body
-
+        imageUrl
         user {
           id
           username
@@ -76,16 +77,19 @@ function Feed() {
           </div>
         </div>
         {createdPosts.map((post) => (
-          <FeedCard name={post.user.username} text={post.body} />
+          <FeedCard
+            name={post.user.username}
+            text={post.body}
+            imageUrl={post.imageUrl}
+          />
         ))}
         {data.getAllPosts.posts.map((post) => (
-          <FeedCard name={post.user.username} text={post.body} />
+          <FeedCard
+            name={post.user.username}
+            text={post.body}
+            imageUrl={post.imageUrl}
+          />
         ))}
-        <FeedCard
-          name="Ministry of Health and Family Welfare, Government of India"
-          text=" Are you a Senior Software Engineer living outside the U.S.? Interested
-        in top remote U.S. Software jobs?"
-        />
       </div>
     </div>
   );
