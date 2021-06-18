@@ -52,10 +52,18 @@ const CREATE_LIKE_MUTAION = gql`
     }
   }
 `;
+const DELETE_LIKE_MUTATION = gql`
+  mutation deleteLike($id: ID!) {
+    deleteLike(id: $id) {
+      message
+    }
+  }
+`;
 function FeedCard({ post }) {
   const { loggedInUser } = useLoggedInUserState();
   const [createComment] = useMutation(CREATE_COMMENT_MUTATION);
   const [createLike] = useMutation(CREATE_LIKE_MUTAION);
+  const [deleteLike] = useMutation(DELETE_LIKE_MUTATION);
   const [likeHovered, setLikeHovered] = useState(false);
   const [barHovered, setBarHovered] = useState(false);
   const [commentInput, setCommentInput] = useState();
@@ -113,6 +121,7 @@ function FeedCard({ post }) {
     // console.log(response.data.createLike.message);
     // console.log(response.data.createLike.like.reactionType);
     const newLike = response.data.createLike.like;
+
     const cloneLike = localLikes.find((like) => like.id === newLike.id);
     // console.log(newLike);
     // console.log(cloneLike);
@@ -129,6 +138,14 @@ function FeedCard({ post }) {
             return like;
           });
         });
+      } else {
+        setLocalLikes((prev) => prev.filter((like) => like.id !== newLike.id));
+        const response = await deleteLike({
+          variables: {
+            id: newLike.id,
+          },
+        });
+        // console.log(response);
       }
     } else {
       setLocalLikes((prev) => [...prev, newLike]);
