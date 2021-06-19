@@ -23,7 +23,7 @@ function MessagingWindow() {
   const textAreaRef = useRef();
   const [sendingMessages, setSendingMessages] = useState(false);
   useEffect(() => {
-    // console.log(currentRoomInfo);
+    // console.log(currentRoomInfo)
 
     setMessages(
       currentRoomInfo.messages.map((message) => {
