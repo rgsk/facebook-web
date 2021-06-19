@@ -302,20 +302,19 @@ function FeedCard({ post }) {
               }
             })}
           </div>
-          {commentsShown !== reversedComments.length && (
+          {commentsShown < reversedComments.length && (
             <div className={styles.commentsDetails}>
               <span
                 className={styles.textButton}
                 onClick={() => {
-                  setCommentsShown(
-                    Math.min(commentsShown + 10, reversedComments.length)
-                  );
+                  setCommentsShown(Math.min(commentsShown + 10));
                 }}
               >
                 View more comments
               </span>
               <span className={styles.detail}>
-                {commentsShown} of {reversedComments.length}
+                {Math.min(commentsShown, reversedComments.length)} of{' '}
+                {reversedComments.length}
               </span>
             </div>
           )}
