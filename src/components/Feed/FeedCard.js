@@ -173,12 +173,7 @@ function FeedCard({ post }) {
       </div>
       <div className={styles.text}>{post.body}</div>
       <div className={styles.asset}>
-        {post.imageUrl && (
-          <img
-            src={process.env.REACT_APP_SERVER_URL + '/' + post.imageUrl}
-            alt="failed to load"
-          />
-        )}
+        {post.imageUrl && <img src={post.imageUrl} alt="failed to load" />}
       </div>
       <div className={styles.postResponse}>
         <div className={styles.like}>

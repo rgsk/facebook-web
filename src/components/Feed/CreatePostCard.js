@@ -15,7 +15,7 @@ import HostQnAImage from '../../assets/iconsCropped/hostqna.png';
 import PhotoImage from '../../assets/iconsCropped/photo.png';
 import TagImage from '../../assets/iconsCropped/tag.png';
 import { ReactComponent as MoreIcon } from '../../assets/icons/more.svg';
-import images from '../../api/images.api';
+
 const CREATE_POST_MUTATION = gql`
   mutation createPost($body: String, $userId: ID!, $imageUrl: String) {
     createPost(body: $body, userId: $userId, imageUrl: $imageUrl) {
@@ -72,13 +72,24 @@ function CreatePostCard({ close, addPost }) {
     close();
   };
   const saveToServer = (file, userId) => {
-    return images
-      .save(file, userId)
-      .then((result) => {
-        return result.asset.value;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'fbgg8sao');
+    const options = {
+      method: 'POST',
+      body: formData,
+    };
+    return fetch(
+      'https://api.Cloudinary.com/v1_1/dguirphl1/image/upload',
+      options
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res);
+        return res.secure_url;
       })
-      .catch((error) => {
-        console.error('Error:', error);
+      .catch((err) => {
+        console.log(err);
       });
   };
   return (
@@ -114,7 +125,7 @@ function CreatePostCard({ close, addPost }) {
 
             {imgPreview && (
               <img
-                src={process.env.REACT_APP_SERVER_URL + '/' + imgPreview}
+                src={imgPreview}
                 alt="selected"
                 className={styles.selectedImage}
               />
@@ -130,8 +141,9 @@ function CreatePostCard({ close, addPost }) {
             onChange={async (e) => {
               const file = e.target.files[0];
               // console.log(file);
-              const savedFile = await saveToServer(file, loggedInUser.id);
-              setImgPreview(savedFile);
+              const savedImgUrl = await saveToServer(file, loggedInUser.id);
+
+              setImgPreview(savedImgUrl);
             }}
           />
           <p className={styles.images}>
